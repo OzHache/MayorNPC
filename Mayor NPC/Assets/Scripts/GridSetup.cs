@@ -4,20 +4,44 @@ using UnityEngine;
 
 public class GridSetup : MonoBehaviour
 {
+    //Reference to the pathfinding script
     private PathFinding pathFinding;
 
+    //Grid properties
     public int rows = 10;
     public int cols = 10;
     public float CellSize;
+    //Inspector variable to trigger using a visual script
+    [Header("Debug with visual Grid?")]
+    public bool DrawGrid;
 
     private void Start()
     {
-        pathFinding = new PathFinding(10, 10, CellSize);
+        // Create a new instance of Pathfinding. This will also generate the new grid. 
+        pathFinding = new PathFinding(10, 10, CellSize, DrawGrid);
+        AddObjects();
+        GameManager.Instance.GridComplete(true);
     }
+    //Called from the Obstacle Manager, Pathfinding makes this space unwalkable
+    public void AddObjects()
+    {
+        List<Obstacle> obstacles = ObstacleManager.GetObstacleManager.GetSceneObstacles();
+        foreach (Obstacle obs in obstacles)
+        {
+            //make it unwalkable
+            pathFinding.AddObstruction(obs.position);
+        }
+
+    }
+
+    /// <summary>
+    /// The remainder of these functions are for debugging
+    /// </summary>
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //If debugging, draw a path from the 0,0 position to the x,y, mouse position of the mouse.
+        if (Input.GetMouseButtonDown(0) && DrawGrid)
         {
             Vector3 mouseWorldPosition = GetMouseWorldPosition2D();
             //get the xy value of from the grid
@@ -27,7 +51,7 @@ public class GridSetup : MonoBehaviour
             {
                 for(int i = 0; i < path.Count -1; i++)
                 {
-                    Debug.DrawLine(new Vector3(path[i].GetX(), path[i].GetY()) * 10f + Vector3.one * 5f, new Vector3(path[i + 1].GetX(), path[i + 1].GetY()) * 10f + (Vector3.one * 5f), Color.green);
+                    Debug.DrawLine(new Vector3(path[i].GetX(), path[i].GetY()) * CellSize + Vector3.one * CellSize, new Vector3(path[i + 1].GetX(), path[i + 1].GetY()) * CellSize + (Vector3.one * CellSize), Color.green);
                 }
             }
         }
@@ -42,5 +66,5 @@ public class GridSetup : MonoBehaviour
         worldPosition.z = 0;
         return worldPosition;
     }
-
+   
 }
