@@ -46,9 +46,18 @@ public class NPCManager : MonoBehaviour
         }
         //assign the pathfindingMovement component
         PFM = gameObject.GetComponent<PathFindingMovement>();
+
+        //Start listening for the Grid to be complete
+
+        GameManager.instance.onGridComplete += StartAI;
+
+        
+        
+    }
+    public void StartAI()
+    {
         //Start the NPCAI() coroutine
         StartCoroutine(NPCAI());
-        
     }
 
     // Update is called once per frame
@@ -59,7 +68,7 @@ public class NPCManager : MonoBehaviour
     IEnumerator NPCAI()
     {
         //wait for the grid system to be populated with the obstacles
-        while (!GameManager.Instance.isGridComplete)
+        while (!GameManager.instance.isGridComplete)
         {
             Debug.Log(Time.frameCount + " Frames it takes to complete the grid");
             yield return null;
@@ -93,7 +102,6 @@ public class NPCManager : MonoBehaviour
             
             yield return null;
         }
-        Debug.Log("NPCAI stopped after " + breaker + " iterations");
     }
     IEnumerator Moving()
     {

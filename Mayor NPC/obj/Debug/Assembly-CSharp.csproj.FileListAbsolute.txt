@@ -119,7 +119,6 @@ D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\System.Xml.XPath.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\System.Xml.XPath.XDocument.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.2D.Tilemap.Editor.dll
-D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.CollabProxy.Editor.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.Rider.Editor.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.TextMeshPro.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.TextMeshPro.Editor.dll
@@ -143,7 +142,6 @@ D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.CrashReporti
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.DirectorModule.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.DSPGraphModule.dll
-D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.FileSystemHttpModule.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.GameCenterModule.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.GridModule.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.HotReloadModule.dll
@@ -201,7 +199,6 @@ D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.VSCode.Editor.pdb
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.TextMeshPro.Editor.pdb
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.UI.pdb
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.Timeline.pdb
-D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.CollabProxy.Editor.pdb
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.Rider.Editor.pdb
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.2D.Tilemap.Editor.pdb
@@ -221,7 +218,6 @@ D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.CoreModule.x
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.CrashReportingModule.xml
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.DSPGraphModule.xml
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.DirectorModule.xml
-D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.FileSystemHttpModule.xml
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.GameCenterModule.xml
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.GridModule.xml
 D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.HotReloadModule.xml
@@ -269,3 +265,16 @@ D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.XRModule.xml
 D:\Applications\Unity\MayorNPC\Mayor NPC\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Applications\Unity\MayorNPC\Mayor NPC\obj\Debug\Assembly-CSharp.dll
 D:\Applications\Unity\MayorNPC\Mayor NPC\obj\Debug\Assembly-CSharp.pdb
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.VisualStudio.Editor.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.SubsystemsModule.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.UIElementsNativeModule.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.VirtualTexturingModule.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.CompilationPipeline.Common.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.TestRunner.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEditor.TestRunner.dll
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\Unity.VisualStudio.Editor.pdb
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.SubsystemsModule.xml
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.UIElementsNativeModule.xml
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.VirtualTexturingModule.xml
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEngine.TestRunner.pdb
+D:\Applications\Unity\MayorNPC\Mayor NPC\Temp\bin\Debug\UnityEditor.TestRunner.pdb
