@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PathFinding {
+    //Debugging
+    bool isDisabled = false;
+
     // To implement this on a pathfinding character get a path by calling PathFinding.Instance.FindPath( my position, target position)
     // this returns a Vector 3 list of waypoints
 
@@ -63,7 +67,13 @@ public class PathFinding {
             List<Vector3> vectorPath = new List<Vector3>();
             foreach(PathNode pathNode in path)
             {
-                vectorPath.Add(new Vector3(pathNode.GetX(), pathNode.GetY()) * grid.GetCellSize() + Vector3.one * grid.GetCellSize() * .5f);
+                //PathNode Location
+                Vector3 pathNodePos = (new Vector3(pathNode.GetX(), pathNode.GetY(), 0));
+                //Cell size Adjustmen
+                Vector3 cellSizeAdjustment = Vector3.one * grid.GetCellSize() * .5f;
+                //Zero Z axis to keep the Movement 2D
+                cellSizeAdjustment.z = 0;
+                vectorPath.Add(pathNodePos * grid.GetCellSize() + cellSizeAdjustment);
             }
             return vectorPath;
         }
@@ -84,7 +94,10 @@ public class PathFinding {
     /// <returns> A List of PathNodes that map a path from the start position to the end position</returns>
     public List<PathNode> FindPath(int startX, int startY, int endX, int endY)
     {
-
+        if (isDisabled)
+        {
+            return null;
+        }
         PathNode startNode = grid.GetGridObject(startX, startY);    //Starting location 
         PathNode endNode = grid.GetGridObject(endX, endY);          //End location
         openList = new List<PathNode> { startNode };                //Points we are still considering
@@ -162,6 +175,8 @@ public class PathFinding {
         //Out of nodes on the open list
         //if we reach here,  there is no valid path
         Debug.Log("No valid path to the position selected");
+        //For debuging
+        isDisabled = true;
         return null;
     }
     

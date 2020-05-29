@@ -8,9 +8,13 @@ public class SceneLoader : MonoBehaviour
     [Header("Debug with grid")]
     [SerializeField]
     private bool willDrawGrid;
+    //Grid size Variables
+    int rows = 100;
+    int cols = 100;
     //References
     private GridSetup gridSetup;
-    public ObstacleManager obstacleManager;
+    private ObstacleManager obstacleManager;
+
 
     //Called once enabled
     private void Start()
@@ -31,18 +35,16 @@ public class SceneLoader : MonoBehaviour
             this.enabled = false;
      
         }
-        /// this will ultimately be rebuilt using Load parameters to tell a new Grid Setup what size it should be and where to start. 
-        //Error logging for missing Gridsetup
-        if (gridSetup == null)
-        {
-            gridSetup = new GridSetup();
-        }
+        //Create the GridSetup
+        gridSetup = new GridSetup();
+
         //Set up the Grid
-        gridSetup.BuildGrid(rows: 10, cols: 10, cellSize: 1f, willDrawGrid: willDrawGrid);
+        gridSetup.BuildGrid(rows: 100, cols: 100, cellSize: 1f, willDrawGrid: willDrawGrid);
         //Get the Obstacles from the Obstacle manager and add them to the Grid
-        gridSetup.AddObjects(obstacleManager.GetSceneObstacles());
+        gridSetup.AddObjects(obstacleManager.GetSceneObstacles(gridSetup.GetSize));
         //Tell the Game Manager that the Game is ready
         GameManager.instance.GridComplete();
+        GameManager.instance.gridSize = new Vector2(rows, cols);
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GridSetup
 {
@@ -9,6 +10,7 @@ public class GridSetup
     //Grid properties
     private int rows = 10;
     private int cols = 10;
+    public Vector2 GetSize { get { return new Vector2(rows, cols); } }
     private float cellSize;
 
     //Scene Loader can check this to see if the Grid has been built
@@ -23,7 +25,7 @@ public class GridSetup
         //Set complete to false
         complete = false;
         // Create a new instance of Pathfinding. This will also generate the new grid. 
-        pathFinding = new PathFinding(10, 10, this.cellSize, willDrawGrid);
+        pathFinding = new PathFinding(rows, cols, this.cellSize, willDrawGrid);
         complete = true;
     }
     //Called from the Obstacle Manager, Pathfinding makes this space unwalkable
@@ -31,8 +33,9 @@ public class GridSetup
     {
         foreach (Obstacle obs in obstacles)
         {
-            //make it unwalkable
-            pathFinding.AddObstruction(obs.position);
+            if (!obs.isPOI)
+                //make it unwalkable
+                pathFinding.AddObstruction(obs.position);
         }
     }
 }

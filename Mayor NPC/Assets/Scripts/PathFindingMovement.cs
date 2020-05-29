@@ -25,7 +25,7 @@ public class PathFindingMovement : MonoBehaviour
         
     }
     //pass in the position based on the type of NPC this is.
-    public void SetTargetPosition (Vector3 targetPosition)
+    public bool SetTargetPosition (Vector3 targetPosition)
     {
         currentPathIndex = 0;
         pathVectorList = PathFinding.Instance.FindPath(position, targetPosition);
@@ -35,7 +35,13 @@ public class PathFindingMovement : MonoBehaviour
             //we don't need to move to the start position, thats the position we are on.
             pathVectorList.RemoveAt(0);
         }
+        return pathVectorList != null;
     }
+    public bool validPathExist(Vector3 targetPosition)
+    {
+       return  PathFinding.Instance.FindPath(position, targetPosition) == null;
+    }
+
 
     /// <summary>
     /// Handles giving rigidbody velocity while I have not reached my destination, 
@@ -61,7 +67,7 @@ public class PathFindingMovement : MonoBehaviour
                 //float distanceBefore = Vector3.Distance(position, targetPosition);
                 
                 //move the Transform in the move dir, at speed * deltaTime.
-                transform.position = position + moveDir * speed * Time.deltaTime;
+                transform.position += (moveDir * (speed * Time.deltaTime));
 
                 //Public expose for animation
                 directionOfTravel = (Vector2)moveDir;

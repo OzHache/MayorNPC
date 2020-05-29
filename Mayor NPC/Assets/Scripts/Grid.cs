@@ -55,7 +55,7 @@ public class Grid<TGridObject>
         this.originPosition = originPosition;
         this.isdrawingGrid = drawGrid;
 
-        //initialize the array that preresents the grid.
+        //initialize the array that represents the grid.
         gridArray = new TGridObject[width, height];
 
         for (int x = 0; x < gridArray.GetLength(0); x++)

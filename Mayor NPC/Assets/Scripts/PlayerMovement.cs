@@ -32,10 +32,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
         //Get the input
         GetInput();
+    }
+    void FixedUpdate()
+    {
+        
         //If we hav input to move, then attempt to move, otherwise, slow down
         if (moving) AttemptMove();
         else SlowDown();
@@ -50,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
     //Get basic movement details
     private void GetInput()
     {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
+        var x = Input.GetAxisRaw("Horizontal");
+        var y = Input.GetAxisRaw("Vertical");
 
         //set direction to a full value
         direction = new Vector2(x, y).normalized;
@@ -60,9 +64,10 @@ public class PlayerMovement : MonoBehaviour
     //make an attempt to move
     private void AttemptMove()
     {
+        rb.velocity = direction * speed;
         //set the rigidody velocity to the direction times acceleration
-        rb.AddForce(direction * acceleration, ForceMode2D.Force);
+        //rb.AddForce(direction * acceleration, ForceMode2D.Force);
         //Limit movement to max speed
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, speed);
+        //rb.velocity = Vector2.ClampMagnitude(rb.velocity, speed);
     }
 }
