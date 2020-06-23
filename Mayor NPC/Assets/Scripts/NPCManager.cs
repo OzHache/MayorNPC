@@ -15,6 +15,9 @@ using System.Runtime.InteropServices;
 [RequireComponent(typeof(Occupation))]
 public class NPCManager : MonoBehaviour
 {
+    //Subscribeable Events
+    public event Action FinishedMoving;
+
     //enum for npcStates
     protected private enum NPCState { Idle, Patrol, Attack, Ranged, Work, Home, Testing, Investigating}
     //Current NPC State
@@ -131,6 +134,9 @@ public class NPCManager : MonoBehaviour
             case NPCState.Investigating:
                 StartCoroutine(Investigate());
                 break;
+            case NPCState.Work:
+                gameObject.SendMessage("Work",SendMessageOptions.DontRequireReceiver);
+                break;
 
                 //In the case of Patrol(Guards and Enemies) patrol between all patrol points, if there is something intersting and I haven't investigated it yet and it is a random interval, go look at it. 
                 //In the case of Attack, Go to my target and attack
@@ -143,9 +149,14 @@ public class NPCManager : MonoBehaviour
         yield return null;
         
     }
-    
+        public void MoveTo(Vector2 location)
+    {
+        targetPos = location;
+        //move to a location but do not restart the AI
+        StartCoroutine(Moving(false));
+    }
     //Manage Movement    
-    IEnumerator Moving()
+    IEnumerator Moving(bool restartAI = true)
     {
         //set the destination
         PFM.SetTargetPosition(targetPos);
@@ -159,7 +170,14 @@ public class NPCManager : MonoBehaviour
         }
         //stop this coroutine when I have made it to my destination
         StopCoroutine(Moving());
+        //ONly restart AI if the AI should be restarted
+        if(restartAI)
         StartCoroutine(NPCAI());
+        //As long as there is a listener trigger this
+        if (FinishedMoving != null)
+        {
+            FinishedMoving();
+        }
     }
 
     // Manage Idle
@@ -305,7 +323,8 @@ public class NPCManager : MonoBehaviour
         {
             //When it is between 0 and 3
             case int n when n < 3:
-                currentState = NPCState.Idle;
+                //TODO: Come back and adjust this to Idle after confirming that it works
+                currentState = NPCState.Work;
                 break;
             //When it is between 3 and 6
             case int n when n >= 3 && n <6:

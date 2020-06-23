@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,13 +21,13 @@ public class WorkZone : MonoBehaviour
     public Vector2 entrance;
 
     public WorkCell TypeOfWork;
-   
+
     //List of WorkCells
     private List<WorkCell> workCells = new List<WorkCell>();
     //List of gameObjects that represent the WorkCells
     public List<GameObject> workCellGameObjects = new List<GameObject>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //If this object does not have a WorkCells Child, Send a warning and disable the Script
         if (!gameObject.transform.Find("WorkCells"))
@@ -35,7 +36,7 @@ public class WorkZone : MonoBehaviour
             this.enabled = false;
             return;
         }
-        foreach(Transform child in transform.Find("WorkCells"))
+        foreach (Transform child in transform.Find("WorkCells"))
         {
             workCellGameObjects.Add(child.gameObject);
         }
@@ -49,9 +50,9 @@ public class WorkZone : MonoBehaviour
     {
 
         //Bubble sort
-        for (var p = 0; p < workCellGameObjects.Count-1; p++)
+        for (var p = 0; p < workCellGameObjects.Count - 1; p++)
         {
-            for (var i = 0; i < workCellGameObjects.Count-1; i++)
+            for (var i = 0; i < workCellGameObjects.Count - 1; i++)
             {
                 bool swap = false;
                 GameObject temp;
@@ -61,16 +62,16 @@ public class WorkZone : MonoBehaviour
                     swap = true;
                 }
                 //If x is the same, and y is more swap them
-                if(workCellGameObjects[i].transform.position.x == workCellGameObjects[i + 1].transform.position.x && workCellGameObjects[i].transform.position.y < workCellGameObjects[i + 1].transform.position.y)
+                if (workCellGameObjects[i].transform.position.x == workCellGameObjects[i + 1].transform.position.x && workCellGameObjects[i].transform.position.y < workCellGameObjects[i + 1].transform.position.y)
                 {
                     swap = true;
                 }
                 if (swap)
                 {
                     // Temp the next item
-                    temp = workCellGameObjects[i+1];
+                    temp = workCellGameObjects[i + 1];
                     // Set next to this item
-                    workCellGameObjects[i+1] = workCellGameObjects[i];
+                    workCellGameObjects[i + 1] = workCellGameObjects[i];
                     // Set this to temp
                     workCellGameObjects[i] = temp;
                 }
@@ -81,9 +82,9 @@ public class WorkZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     /// <summary>
     /// Used to ensure that the WorkZone is aligned with the Global grid
     /// </summary>
@@ -102,7 +103,7 @@ public class WorkZone : MonoBehaviour
     void SetUpWorkCells()
     {
         //Iterate on x (Cols)
-        for(var x = 0; x <  xSize; x++)
+        for (var x = 0; x < xSize; x++)
         {
             //Iterate on y (Rows)
             for (var y = 0; y < ySize; y++)
@@ -113,5 +114,21 @@ public class WorkZone : MonoBehaviour
                 workCells.Add(newWorkCell);
             }
         }
+    }
+
+    /// <summary>
+    /// looks through the current workcells and find the first that is not completed
+    /// </summary>
+    /// <returns></returns>
+    public WorkCell GetWork()
+    {
+        foreach (WorkCell cell in workCells)
+        {
+            if (cell.needsWork)
+            {
+                return cell;
+            }
+        }
+        return null;
     }
 }

@@ -15,6 +15,7 @@ public class WorkCell : MonoBehaviour
     public GameObject dependant;
     public float percentWorkComplete { get; private set; }
     private float percentPerWorkAction = 10f;
+    public bool needsWork { get { return state == WorkCellState.dry; } }
     public bool isComplete { get { return percentWorkComplete == 100f; } }
 
     /// <summary>
