@@ -9,7 +9,7 @@ using UnityEngine;
 public class Occupation : MonoBehaviour
 {
     //What This NPC Does
-    public enum Job { Unemployed, Farmer}
+    public enum Job { Unemployed, Farmer, Lumber_Jack}
     public Job job { get; protected set; }
 
     //Status of work

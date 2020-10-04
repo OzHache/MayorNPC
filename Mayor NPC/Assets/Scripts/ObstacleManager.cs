@@ -113,6 +113,5 @@ public class ObstacleManager : MonoBehaviour
         //reverse the order so it is closes first
         POIs.Reverse();
         return POIs;
-        return POIs;
     }
 }

@@ -20,7 +20,7 @@ public class CharacterAnimations : MonoBehaviour
 
     //shared parameters
     private Vector2 directionOfTravel;
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
     private Animator animator;
 
 
@@ -65,7 +65,7 @@ public class CharacterAnimations : MonoBehaviour
         else
         {
             animator = GetComponent<Animator>();
-            renderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
 
@@ -111,7 +111,7 @@ public class CharacterAnimations : MonoBehaviour
         //set moving
         animator.SetBool("Moving", directionOfTravel != Vector2.zero);
         //Flip X if needed
-        renderer.flipX = directionOfTravel.x < 0;
+        spriteRenderer.flipX = directionOfTravel.x < 0;
         
 
     }

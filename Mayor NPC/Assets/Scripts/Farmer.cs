@@ -60,7 +60,7 @@ public class Farmer : Occupation
     }
     IEnumerator Working()
     {
-        //if there is no move work to do. 
+        //if there is no move work to do restart AI. 
         if(currentCell == null)
         {
             workStatus = Status.Complete; 
@@ -95,6 +95,9 @@ public class Farmer : Occupation
             yield return new WaitForSeconds(workTime);
             currentCell = workZone.GetWork();
         }
+        workStatus = Status.Complete;
+        gameObject.GetComponent<NPCManager>().StartAI();
+        yield break;
     }
 
     void StopMoving()

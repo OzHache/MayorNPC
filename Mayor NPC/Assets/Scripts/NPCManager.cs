@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 [RequireComponent(typeof(Occupation))]
 public class NPCManager : MonoBehaviour
 {
+    #region Variables
     //Subscribeable Events
     public event Action FinishedMoving;
 
@@ -37,13 +38,12 @@ public class NPCManager : MonoBehaviour
     private Vector3 targetPos;
 
     //recall variable for ensuring the next target is not the current or last target. 
-    private Vector3 lastTargetPos;
+    private Vector3 lastTargetPos = -Vector3.one;
     //Refercence to the PathFinding Movement Script
     private PathFindingMovement PFM;
-
+    //Reference to the LOS 
     private LineOfSight LOS;
-    //
-
+    //Reference to the occupation
     private Occupation occupation;
     //Memory for POIs 
     Memory memory = new Memory();
@@ -51,11 +51,11 @@ public class NPCManager : MonoBehaviour
     //Interesting Item I am Ivestigating
     InterestItem interestItem = null;
 
-
+    #endregion Variables
     // Start is called before the first frame update
     private void Awake()
     {
-        
+        //
     }
     void Start()
     {
@@ -69,6 +69,7 @@ public class NPCManager : MonoBehaviour
         {
             currentState = NPCState.Idle;
         }
+
         //Check if the required components are available;
         if(GetComponent<PathFindingMovement>() == null)
         {
@@ -76,16 +77,15 @@ public class NPCManager : MonoBehaviour
             Debug.LogWarning("This NPC needs a Path Finding Movement Script component " + this.gameObject.name, this.gameObject);
         }
         LOS = gameObject.GetComponent<LineOfSight>();
+
         //assign the pathfindingMovement component
         PFM = gameObject.GetComponent<PathFindingMovement>();
+
         //assign occupation
         occupation = gameObject.GetComponent<Occupation>();
+
         //Start listening for the Grid to be complete
-
         GameManager.instance.onGridComplete += StartAI;
-
-        
-        
     }
     public void StartAI()
     {
@@ -100,7 +100,6 @@ public class NPCManager : MonoBehaviour
         Gizmos.color = color;
         Gizmos.DrawSphere(transform.position, interestRadius);
     }
-
     IEnumerator NPCAI()
     {
         //wait for the grid system to be populated with the obstacles
@@ -149,7 +148,7 @@ public class NPCManager : MonoBehaviour
         yield return null;
         
     }
-        public void MoveTo(Vector2 location)
+    public void MoveTo(Vector2 location)
     {
         targetPos = location;
         //move to a location but do not restart the AI
@@ -170,7 +169,7 @@ public class NPCManager : MonoBehaviour
         }
         //stop this coroutine when I have made it to my destination
         StopCoroutine(Moving());
-        //ONly restart AI if the AI should be restarted
+        //Only restart AI if the AI should be restarted
         if(restartAI)
         StartCoroutine(NPCAI());
         //As long as there is a listener trigger this
@@ -179,7 +178,6 @@ public class NPCManager : MonoBehaviour
             FinishedMoving();
         }
     }
-
     // Manage Idle
     IEnumerator Idle()
     {
@@ -266,7 +264,7 @@ public class NPCManager : MonoBehaviour
                 isValid = (hit.distance < 2 || !hit);
                 //if hit is null, we can move up to a randomDistance between 1 and interest Radius/2
             }
-            //do this while the hit distance is less than 2 or until we don't hti anything
+            //do this while the hit distance is less than 2 or until we don't hit anything
             
             if (!hit)
             {
@@ -278,7 +276,7 @@ public class NPCManager : MonoBehaviour
             }
             else
             {
-                //otherwise, find a position between hit and this object that is greater 2  and less than half the inerest Radius
+                //otherwise, find a position between hit and this object that is greater 2  and less than half the interest Radius
                 position = (Vector2)transform.position + (direction * Random.Range(2, hit.distance -1f));
                 position.x = Mathf.Floor(position.x) +.5f;
                 position.y = Mathf.Floor(position.y) +.5f;
@@ -318,13 +316,18 @@ public class NPCManager : MonoBehaviour
         //get the game time
         int hour = (int)(GameManager.instance.GetTime() / 60f);
         //based on the hour set work to task
-
+        if(currentState == NPCState.Investigating)
+        {
+            return;
+        }
         switch (hour)
         {
             //When it is between 0 and 3
             case int n when n < 3:
                 //TODO: Come back and adjust this to Idle after confirming that it works
                 currentState = NPCState.Work;
+                if (occupation.isComplete)
+                    currentState = NPCState.Idle;
                 break;
             //When it is between 3 and 6
             case int n when n >= 3 && n <6:
@@ -345,8 +348,6 @@ public class NPCManager : MonoBehaviour
                 break;
         }
     }
-
-
     internal class InterestItem : IEquatable<InterestItem>, IComparable<InterestItem>
     {
         internal GameObject gameObject = null;

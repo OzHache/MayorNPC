@@ -21,7 +21,7 @@ public class NPCMovement : MonoBehaviour
 
     //Game Mechanics
     private Rigidbody2D rb;
-    private Collider2D collider2D;
+    private Collider2D npcCollider;
 
     //Path Calculation
     private List<Vector2> wayPoints = new List<Vector2>();
@@ -29,7 +29,7 @@ public class NPCMovement : MonoBehaviour
     private void Awake()
     {
         //rb = gameObject.GetComponent<Rigidbody2D>();
-        collider2D = gameObject.GetComponent<Collider2D>();
+        npcCollider = gameObject.GetComponent<Collider2D>();
     }
     // Start is called before the first frame update
     void Start()

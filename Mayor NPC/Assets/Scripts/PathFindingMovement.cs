@@ -86,7 +86,7 @@ public class PathFindingMovement : MonoBehaviour
                 }
             }
             //still moving
-            Debug.Log(targetPosition + "This is where I am moving to.", this.gameObject);
+            //Debug.Log(targetPosition + "This is where I am moving to.", this.gameObject);
             return true;
         }
         else
